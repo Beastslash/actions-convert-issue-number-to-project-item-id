@@ -33191,13 +33191,11 @@ try {
     if (!issueID && !issueNumber)
         throw new Error("github-issue-number or github-issue-id required.");
     const projectID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-project-id", { required: true });
-    const repositoryOwner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-repository-owner", { required: false }) || _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.owner;
-    const repositoryName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-repository-name", { required: false }) || _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.repo.repo;
     let response;
     let nodeID;
     do {
         response = await octokit.graphql(`
-      query getProjectNodeID($repositoryName: String!, $repositoryOwner: String!, $projectID: ID!, $endCursor: String) {
+      query getProjectNodeID($projectID: ID!, $endCursor: String) {
         node(id: $projectID) {
           ... on ProjectV2 {
             items(first: 100, after: $endCursor) {
@@ -33219,8 +33217,6 @@ try {
         }
       }
     `, {
-            repositoryName,
-            repositoryOwner,
             projectID,
             issueNumber
         });

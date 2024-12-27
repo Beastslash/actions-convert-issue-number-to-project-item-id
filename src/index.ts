@@ -32,8 +32,6 @@ try {
   if (!issueID && !issueNumber) throw new Error("github-issue-number or github-issue-id required.");
 
   const projectID = core.getInput("github-project-id", {required: true});
-  const repositoryOwner = core.getInput("github-repository-owner", {required: false}) || github.context.repo.owner;
-  const repositoryName = core.getInput("github-repository-name", {required: false}) || github.context.repo.repo;
 
   let response;
   let nodeID;
@@ -56,7 +54,7 @@ try {
         }
       }
     }>(`
-      query getProjectNodeID($repositoryName: String!, $repositoryOwner: String!, $projectID: ID!, $endCursor: String) {
+      query getProjectNodeID($projectID: ID!, $endCursor: String) {
         node(id: $projectID) {
           ... on ProjectV2 {
             items(first: 100, after: $endCursor) {
@@ -78,8 +76,6 @@ try {
         }
       }
     `, {
-      repositoryName,
-      repositoryOwner,
       projectID,
       issueNumber
     });

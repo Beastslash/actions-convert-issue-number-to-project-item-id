@@ -17,14 +17,6 @@ inputs:
     description: "If true, the workflow will throw an error if the issue isn't found; otherwise, the output will be undefined."
     required: false
 
-  # Repository overrides
-  github-repository-name:
-    description: "The name of the project's repository. If not provided, the workflow will default to its own repository."
-    required: false
-  github-repository-owner:
-    description: "The owner of the project's repository. If not provided, the workflow will default to its own repository owner."
-    required: false
-
   # Authentication inputs for GitHub app
   github-app-id:
     description: "The ID of your GitHub app. Required if a personal access token is not provided."
