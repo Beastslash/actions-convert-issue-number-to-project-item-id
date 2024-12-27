@@ -16,7 +16,7 @@ A GitHub action used to get a project item ID from an issue number or ID.
 ## Outputs
 | Name | Description |
 | :- | :- |
-| `GITHUB_PROJECT_FIELD_ID` | The requested project field ID. |
+| `GITHUB_PROJECT_ITEM_ID` | The requested project item ID. Can be an empty string (`0`) if `should-fail-if-issue-not-found` isn't provided. |
 
 ## Permissions
 Your GitHub app installation or your personal access token must have at least the following permissions:
