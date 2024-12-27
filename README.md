@@ -27,7 +27,7 @@ Your GitHub app installation or your personal access token must have at least th
 ```yml
 - name: Convert issue number to project item ID
   id: convert_issue_number_to_project_item_id
-  uses: Beastslash/actions-get-project-item-id-from-issue@v1.0.0
+  uses: Beastslash/actions-get-project-item-id-from-issue@v1.0.1
   with:
     github-project-id: ${{ steps.convert_project_number_to_id.outputs.GITHUB_PROJECT_ID }}
     github-app-id: ${{ vars.ISSUES_SYNC_GITHUB_APP_ID }}
