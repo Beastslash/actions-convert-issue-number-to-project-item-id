@@ -33197,7 +33197,7 @@ try {
     let nodeID;
     do {
         response = await octokit.graphql(`
-      query getProjectID($repositoryName: String!, $repositoryOwner: String!, $projectID: ID!, $endCursor: String) {
+      query getProjectNodeID($repositoryName: String!, $repositoryOwner: String!, $projectID: ID!, $endCursor: String) {
         node(id: $projectID) {
           ... on ProjectV2 {
             items(first: 100, after: $endCursor) {
