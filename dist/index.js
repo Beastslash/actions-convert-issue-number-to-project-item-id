@@ -33187,9 +33187,7 @@ try {
     }
     // Get the item.
     const issueID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-id", { required: false });
-    const issueNumber = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-number", { required: false }), 10);
-    if (!issueID && !issueNumber)
-        throw new Error("github-issue-number or github-issue-id required.");
+    const issueNumber = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-number", { required: false }), 10) || _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.issue.number;
     const projectID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-project-id", { required: true });
     let response;
     let nodeID;

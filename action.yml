@@ -5,10 +5,10 @@ inputs:
 
   # Project metadata
   github-issue-number:
-    description: "The number of the issue that you want to find the item ID of. Required if issue node ID is not provided."
+    description: "The number of the issue that you want to find the item ID of. Defaults to the triggering issue."
     required: false
   github-issue-id:
-    description: "The ID of the issue that you want to find the item ID of. Required if issue number is not provided."
+    description: "The ID of the issue that you want to find the item ID of."
     required: false
   github-project-id:
     description: "The ID of the project that links to the issue."
