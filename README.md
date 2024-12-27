@@ -1,5 +1,5 @@
 # actions-get-project-item-id-from-issue
-A GitHub action used to get a project field ID from its name.
+A GitHub action used to get a project item ID from an issue number or ID.
 
 ## Inputs
 | Name | Description | Required? |
