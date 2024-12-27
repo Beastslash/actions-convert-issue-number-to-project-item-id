@@ -33188,6 +33188,8 @@ try {
     // Get the item.
     const issueID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-id", { required: false });
     const issueNumber = parseInt(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-number", { required: false }), 10) || _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.issue.number;
+    const repositoryName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-repository-name", { required: false }) || _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.issue.repo;
+    const repositoryOwner = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-issue-repository-owner", { required: false }) || _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.issue.owner;
     const projectID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-project-id", { required: true });
     let response;
     let nodeID;
@@ -33204,6 +33206,12 @@ try {
                   ... on Issue {
                     id
                     number
+                    repository {
+                      name
+                      owner {
+                        login
+                      }
+                    }
                   }
                 }
               }
@@ -33217,11 +33225,10 @@ try {
       }
     `, {
             projectID,
-            issueNumber,
             endCursor
         });
         const itemNodes = response.node.items.nodes;
-        const item = itemNodes.find((node) => node.content.id === issueID || node.content.number === issueNumber);
+        const item = itemNodes.find((node) => node.content.id === issueID || (node.content.number === issueNumber && node.content.repository.name === repositoryName && node.content.repository.owner.login === repositoryOwner));
         endCursor = response.node.items.pageInfo.endCursor;
         nodeID = item?.id;
     } while (!nodeID && response.node.items.pageInfo.hasNextPage);

@@ -7,6 +7,12 @@ inputs:
   github-issue-number:
     description: "The number of the issue that you want to find the item ID of. Defaults to the triggering issue."
     required: false
+  github-issue-repository-name:
+    description: "The name of the issue's repository. Required if github-issue-number is provided."
+    required: false
+  github-issue-repository-owner:
+    description: "The username of the issue's repository owner. Required if github-issue-number is provided."
+    required: false
   github-issue-id:
     description: "The ID of the issue that you want to find the item ID of."
     required: false

@@ -5,8 +5,10 @@ A GitHub action used to get a project item ID from an issue number or ID.
 | Name | Description | Required? |
 | :- | :- | :- |
 | `github-project-id` | The ID (not number) of the project that links to the issue. If you don't know the project ID, consider using [get-project-id-from-number](https://github.com/Beastslash/actions-get-project-id-from-number). | Yes |
-| `github-issue-number` | The number of the issue that you want to find the item ID of. Defaults to the triggering issue. | Only if the workflow isn't caused due to an issue and if `github-issue-id` is not provided. |
 | `github-issue-id` | The ID of the issue that you want to find the item ID of. | Only if the workflow isn't caused due to an issue and if `github-issue-number` is not provided. |
+| `github-issue-number` | The number of the issue that you want to find the item ID of. Defaults to the triggering issue. | Only if the workflow isn't caused due to an issue and if `github-issue-id` is not provided. |
+| `github-issue-repository-name` | The name of the issue's repository. Defaults to the triggering issue repository name. | Only if the workflow isn't caused due to an issue and if `github-issue-id` is not provided. |
+| `github-issue-repository-owner` | The username of the issue's repository owner. Defaults to the triggering issue repository owner. | Only if the workflow isn't caused due to an issue and if `github-issue-id` is not provided. |
 | `should-fail-if-issue-not-found` | If true, the workflow will fail if the issue isn't found; otherwise, the output will be undefined. | No |
 | `github-app-id` | The app ID of the GitHub app that you are authenticating with. | Only if `github-personal-access-token` is not provided |
 | `github-app-private-key` | A private key of the GitHub app that you are authenticating with. | Only if `github-personal-access-token` is not provided |
@@ -27,7 +29,7 @@ Your GitHub app installation or your personal access token must have at least th
 ```yml
 - name: Convert issue number to project item ID
   id: convert_issue_number_to_project_item_id
-  uses: Beastslash/actions-get-project-item-id-from-issue@v1.0.1
+  uses: Beastslash/actions-get-project-item-id-from-issue@v1.0.2
   with:
     github-project-id: ${{ steps.convert_project_number_to_id.outputs.GITHUB_PROJECT_ID }}
     github-app-id: ${{ vars.ISSUES_SYNC_GITHUB_APP_ID }}

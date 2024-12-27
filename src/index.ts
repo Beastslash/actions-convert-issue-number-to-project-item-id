@@ -29,6 +29,8 @@ try {
   // Get the item.
   const issueID = core.getInput("github-issue-id", {required: false});
   const issueNumber = parseInt(core.getInput("github-issue-number", {required: false}), 10) || github.context.issue.number;
+  const repositoryName = core.getInput("github-issue-repository-name", {required: false}) || github.context.issue.repo;
+  const repositoryOwner = core.getInput("github-issue-repository-owner", {required: false}) || github.context.issue.owner;
   const projectID = core.getInput("github-project-id", {required: true});
 
   let response;
@@ -44,6 +46,12 @@ try {
             content: {
               id: string;
               number: number;
+              repository: {
+                name: string;
+                owner: {
+                  login: string;
+                }
+              }
             }
           }[];
           pageInfo: {
@@ -63,6 +71,12 @@ try {
                   ... on Issue {
                     id
                     number
+                    repository {
+                      name
+                      owner {
+                        login
+                      }
+                    }
                   }
                 }
               }
@@ -76,12 +90,11 @@ try {
       }
     `, {
       projectID,
-      issueNumber,
       endCursor
     });
 
     const itemNodes = response.node.items.nodes;
-    const item = itemNodes.find((node) => node.content.id === issueID || node.content.number === issueNumber);
+    const item = itemNodes.find((node) => node.content.id === issueID || (node.content.number === issueNumber && node.content.repository.name === repositoryName && node.content.repository.owner.login === repositoryOwner));
     endCursor = response.node.items.pageInfo.endCursor;
     nodeID = item?.id;
 
