@@ -1,0 +1,26 @@
+{
+  "name": "actions-convert-issue-number-to-project-item-id",
+  "version": "1.0.0",
+  "description": "Convert an issue number to an ID. You can use a personal access token (PAT) or GitHub app.",
+  "homepage": "https://github.com/Beastslash/actions-convert-project-number-to-id#readme",
+  "bugs": {
+    "url": "https://github.com/Beastslash/actions-convert-project-number-to-id/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beastslash/actions-convert-project-number-to-id.git"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Christian Toney",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "compile": "tsc --build --clean && tsc --build && ncc build dist/index.js --license licenses.txt",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "octokit": "^4.0.2"
+  }
+}
