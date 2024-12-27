@@ -1,4 +1,4 @@
-name: "Get project item ID from issue number"
+name: "Get project item ID from issue"
 author: "Christian Toney"
 description: "Get a project item ID from an issue number or ID. You can use a personal access token (PAT) or GitHub app."
 inputs:
