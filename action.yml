@@ -1,6 +1,6 @@
-name: "Convert issue number to project item ID"
+name: "Get project item ID from issue number"
 author: "Christian Toney"
-description: "Convert a project number to an ID. You can use a personal access token (PAT) or GitHub app."
+description: "Get a project item ID from an issue number. You can use a personal access token (PAT) or GitHub app."
 inputs:
 
   # Project metadata
@@ -14,7 +14,7 @@ inputs:
     description: "The ID of the project that links to the issue."
     required: true
   should-fail-if-issue-not-found:
-    description: "If true, the workflow will throw an error if the issue isn't found; otherwise, the output will be undefined."
+    description: "If true, the workflow will fail if the issue isn't found; otherwise, the output will be undefined."
     required: false
 
   # Authentication inputs for GitHub app
