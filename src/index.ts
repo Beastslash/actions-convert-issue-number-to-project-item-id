@@ -29,7 +29,6 @@ try {
   // Get the item.
   const issueID = core.getInput("github-issue-id", {required: false});
   const issueNumber = parseInt(core.getInput("github-issue-number", {required: false}), 10) || github.context.issue.number;
-
   const projectID = core.getInput("github-project-id", {required: true});
 
   let response;
