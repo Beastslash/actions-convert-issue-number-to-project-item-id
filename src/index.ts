@@ -33,6 +33,7 @@ try {
 
   let response;
   let nodeID;
+  let endCursor;
   do {
 
     response = await octokit.graphql<{
@@ -75,11 +76,13 @@ try {
       }
     `, {
       projectID,
-      issueNumber
+      issueNumber,
+      endCursor
     });
 
     const itemNodes = response.node.items.nodes;
     const item = itemNodes.find((node) => node.content.id === issueID || node.content.number === issueNumber);
+    endCursor = response.node.items.pageInfo.endCursor;
     nodeID = item?.id;
 
   } while (!nodeID && response.node.items.pageInfo.hasNextPage);

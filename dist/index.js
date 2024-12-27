@@ -33191,6 +33191,7 @@ try {
     const projectID = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("github-project-id", { required: true });
     let response;
     let nodeID;
+    let endCursor;
     do {
         response = await octokit.graphql(`
       query getProjectNodeID($projectID: ID!, $endCursor: String) {
@@ -33216,10 +33217,12 @@ try {
       }
     `, {
             projectID,
-            issueNumber
+            issueNumber,
+            endCursor
         });
         const itemNodes = response.node.items.nodes;
         const item = itemNodes.find((node) => node.content.id === issueID || node.content.number === issueNumber);
+        endCursor = response.node.items.pageInfo.endCursor;
         nodeID = item?.id;
     } while (!nodeID && response.node.items.pageInfo.hasNextPage);
     if (!nodeID && _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("should-fail-if-issue-not-found", { required: false })) {
