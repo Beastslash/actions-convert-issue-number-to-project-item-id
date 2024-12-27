@@ -32,8 +32,8 @@ try {
   if (!issueID && !issueNumber) throw new Error("github-issue-number or github-issue-id required.");
 
   const projectID = core.getInput("github-project-id", {required: true});
-  const repositoryOwner = core.getInput("github-repository-owner", {required: false});
-  const repositoryName = core.getInput("github-repository-name", {required: false});
+  const repositoryOwner = core.getInput("github-repository-owner", {required: false}) || github.context.repo.owner;
+  const repositoryName = core.getInput("github-repository-name", {required: false}) || github.context.repo.repo;
 
   let response;
   let nodeID;
@@ -78,14 +78,14 @@ try {
         }
       }
     `, {
-      repositoryName: repositoryName ?? github.context.repo.repo,
-      repositoryOwner: repositoryOwner ?? github.context.repo.owner,
+      repositoryName,
+      repositoryOwner,
       projectID,
       issueNumber
     });
 
     const itemNodes = response.node.items.nodes;
-    const item = itemNodes.find((item) => item.content.id === issueID || item.content.issueNumber === issueNumber);
+    const item = itemNodes.find((node) => node.content.id === issueID || node.content.issueNumber === issueNumber);
     nodeID = item?.id;
 
   } while (!nodeID && response.node.items.pageInfo.hasNextPage);
