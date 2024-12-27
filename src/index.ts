@@ -86,7 +86,7 @@ try {
 
   } while (!nodeID && response.node.items.pageInfo.hasNextPage);
 
-  if (!nodeID && core.getBooleanInput("should-fail-if-issue-not-found", {required: false})) {
+  if (!nodeID && core.getInput("should-fail-if-issue-not-found", {required: false})) {
 
     throw new Error("Project item ID not found.")
 
