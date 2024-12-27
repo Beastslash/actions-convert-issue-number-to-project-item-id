@@ -46,7 +46,7 @@ try {
             id: string;
             content: {
               id: string;
-              issueNumber: number;
+              number: number;
             }
           }[];
           pageInfo: {
@@ -65,7 +65,7 @@ try {
                 content {
                   ... on Issue {
                     id
-                    issueNumber
+                    number
                   }
                 }
               }
@@ -85,7 +85,7 @@ try {
     });
 
     const itemNodes = response.node.items.nodes;
-    const item = itemNodes.find((node) => node.content.id === issueID || node.content.issueNumber === issueNumber);
+    const item = itemNodes.find((node) => node.content.id === issueID || node.content.number === issueNumber);
     nodeID = item?.id;
 
   } while (!nodeID && response.node.items.pageInfo.hasNextPage);
@@ -96,7 +96,7 @@ try {
 
   } 
 
-  core.setOutput("github-project-item-id", nodeID);
+  core.setOutput("GITHUB_PROJECT_ITEM_ID", nodeID);
 
 } catch (error) {
 

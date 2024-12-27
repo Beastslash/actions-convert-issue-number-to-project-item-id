@@ -33206,7 +33206,7 @@ try {
                 content {
                   ... on Issue {
                     id
-                    issueNumber
+                    number
                   }
                 }
               }
@@ -33225,13 +33225,13 @@ try {
             issueNumber
         });
         const itemNodes = response.node.items.nodes;
-        const item = itemNodes.find((node) => node.content.id === issueID || node.content.issueNumber === issueNumber);
+        const item = itemNodes.find((node) => node.content.id === issueID || node.content.number === issueNumber);
         nodeID = item?.id;
     } while (!nodeID && response.node.items.pageInfo.hasNextPage);
     if (!nodeID && _actions_core__WEBPACK_IMPORTED_MODULE_0__.getBooleanInput("should-fail-if-issue-not-found")) {
         throw new Error("Project item ID not found.");
     }
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("github-project-item-id", nodeID);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput("GITHUB_PROJECT_ITEM_ID", nodeID);
 }
 catch (error) {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error instanceof Error ? error : "Unknown error.");
